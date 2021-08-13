@@ -10,6 +10,8 @@ import { AuthService } from '../../auth/services/auth.service';
     *{
       margin: 20px;
     }
+
+
   
   `]
 })
