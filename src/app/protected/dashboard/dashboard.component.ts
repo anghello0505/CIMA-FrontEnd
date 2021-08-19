@@ -1,21 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth/services/auth.service';
+import { Usuario } from '../../auth/interfaces/interfaces';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styles: [`
-
-    *{
-      margin: 20px;
-    }
-
-
-  
-  `]
+  styles: []
 })
-export class DashboardComponent {
+export class DashboardComponent implements AfterViewInit {
+
+  usuarioActual:Usuario = {
+    uid: '',
+    name: '',
+    email: ''
+    
+  }; 
 
   get usuario(){
     return this.authService.usuario;
@@ -23,9 +23,12 @@ export class DashboardComponent {
 
   constructor( private router:Router,
                private authService: AuthService ) { }
+  ngAfterViewInit(): void {
+    this.usuarioActual = this.usuario;
+  }
 
   logout(){
       this.authService.logout();
-      this.router.navigateByUrl('/auth/login');
+      this.router.navigateByUrl('*');
   }
 }
